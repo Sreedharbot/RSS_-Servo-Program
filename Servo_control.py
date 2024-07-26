@@ -2,10 +2,19 @@ import asyncio
 import RPi.GPIO as GPIO
 import numpy as np
 import time
+import spidev
 
+Led = 10
 swt_pin = 8
 servo_pin = 12
+Trig = 40
+echo = 37
 
+
+
+spi = spidev.SpiDev()
+spi.open(0,0)
+spi.max_speed_hz = 1350000
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(swt_pin,GPIO.IN,pull_up_down=GPIO.PUD_UP)
@@ -26,6 +35,13 @@ class Eventhandler:
         duty_cycle = 1 + (9/180)*angle
         est = round(duty_cycle,1)
         return est
+
+    def pot_value(self,channel):
+        command = [1,(8+channel<<4),0]
+        response = spi.xfer2(command)
+        adc_value = ((response[1]&3)<<8)+response[2]
+        return adc_value
+
 
     async def servo(self):
 
@@ -57,7 +73,14 @@ class Eventhandler:
             time.sleep(1)
         await asyncio.sleep(1)
 
-
+    async def potentiometer(self):
+        while True:
+            value = self.pot_value(0)
+            new_angle = (90/1023)*value
+            b = self.rot_angle(new_angle)
+            pwm.ChangeDutyCycle(b)
+            print(f"ADC value from the pot {value} & the servo position is {new_angle}")
+            await asyncio.sleep(1)
 
     # async def limit():
         
@@ -73,6 +96,9 @@ class Eventhandler:
     async def main(self):
         await self.servo()
         await self.servo_rotate()
+        await self.potentiometer()
+
+    
         #await limit()
         await self.shutdown()
 
