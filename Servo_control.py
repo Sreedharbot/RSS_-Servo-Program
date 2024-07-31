@@ -8,6 +8,8 @@ import RPi.GPIO as GPIO
 import numpy as np
 import time
 import spidev
+import os
+import sys
 
 
 #Global Varibles 
@@ -31,8 +33,10 @@ GPIO.setup(Led,GPIO.OUT)
 GPIO.setup(Trig,GPIO.OUT)
 GPIO.setup(echo,GPIO.IN)
 
+
 pwm = GPIO.PWM(servo_pin,50)
 pwm.start(0)
+
 
 #using handler to execute the task.
 class Eventhandler:
@@ -59,10 +63,10 @@ class Eventhandler:
         for i in range(0,190,10):
             a = self.rot_angle(i)                       
             pwm.ChangeDutyCycle(a)
+            limit_status = GPIO.input(swt_pin)
             #print(i)
             #print(a)
             time.sleep(0.1)
-            limit_status = GPIO.input(swt_pin)
             if not limit_status:                        # Detecting Collision in the limit swtich.
                 print("Servo is at 0°")
                 #pwm.stop()
@@ -90,11 +94,12 @@ class Eventhandler:
             new_angle = (90/1023)*value               
             b = self.rot_angle(new_angle)
             pwm.ChangeDutyCycle(b)
-            print(f"ADC value from the pot {value} & the servo position is {new_angle}")
+            if value>0:
+                print(f"ADC value from the pot {value} & the servo position is {new_angle}")
             await asyncio.sleep(0.1)
 
             GPIO.output(Trig,False)                    #activating the Ultrasonic sensor to detect object 
-            print("sensoring setting")
+            #print("sensoring setting")
             time.sleep(0.3)
             GPIO.output(Trig,True)
             time.sleep(0.00001)
@@ -111,13 +116,27 @@ class Eventhandler:
 
             distance = time_duration*17150
             distance = round(distance,2)
-            print(f"Object detected distance: {distance} cm")
+            status = GPIO.input(swt_pin)
 
             if distance<=15:                                #if the object is less thanm 15c, the red LED turns ON
                 GPIO.output(Led,True)
+                print(f"Object detected distance: {distance} cm")
+                print(f"Servo is stopped , Press the limit swtich to active")
+                value = 0
+                pwm.stop()
+                
+            elif not status:
+                print(f"button status {status} ")
+                print("Restarting the Program")
+                GPIO.cleanup()
+                python = sys.executable 
+                script = os.path.abspath(__file__)
+                os.execl(python, python, script, *sys.argv)
+
+
             else:
                 GPIO.output(Led,False)
-
+            
 
     async def shutdown(self):
         pwm.stop()
