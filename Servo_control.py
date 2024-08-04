@@ -18,6 +18,8 @@ swt_pin = 8
 servo_pin = 12
 Trig = 40
 echo = 37
+zero_LED = 36
+N_LED=38
 
 
 #implementation of the SPI communication with MCP3008
@@ -32,10 +34,11 @@ GPIO.setup(servo_pin,GPIO.OUT)
 GPIO.setup(Led,GPIO.OUT)
 GPIO.setup(Trig,GPIO.OUT)
 GPIO.setup(echo,GPIO.IN)
-
+GPIO.setup(zero_LED,GPIO.OUT)            #0° LED
+GPIO.setup(N_LED,GPIO.OUT)               #90° LED
 
 pwm = GPIO.PWM(servo_pin,50)
-pwm.start(0)
+pwm.start(0)                             #Starting servo 
 
 
 #using handler to execute the task.
@@ -64,9 +67,9 @@ class Eventhandler:
             a = self.rot_angle(i)                       
             pwm.ChangeDutyCycle(a)
             limit_status = GPIO.input(swt_pin)
-            #print(i)
-            #print(a)
-            time.sleep(0.1)
+            print(i)
+            print(a)
+            time.sleep(0.2)
             if not limit_status:                        # Detecting Collision in the limit swtich.
                 print("Servo is at 0°")
                 #pwm.stop()
@@ -76,7 +79,6 @@ class Eventhandler:
                 break
         await asyncio.sleep(0.3)
 
-
     async def servo_rotate(self):                       #Rotating 90° after homing
         self.position = self.home_angle-100
         print(f'home angle is {self.home_angle} & position is {self.position}')
@@ -84,8 +86,8 @@ class Eventhandler:
             a = self.rot_angle(i)
             pwm.ChangeDutyCycle(a)
             print(self.home_angle-i)
-            #print(a)                                    #pulse-width signal
-            time.sleep(0.1)
+            print(a)                                    #pulse-width signal
+            time.sleep(0.2)
         await asyncio.sleep(0.3)
 
     async def potentiometer(self):                      #Using Pot to control the Servo 
@@ -94,9 +96,22 @@ class Eventhandler:
             new_angle = (90/1023)*value               
             b = self.rot_angle(new_angle)
             pwm.ChangeDutyCycle(b)
+
             if value>0:
                 print(f"ADC value from the pot {value} & the servo position is {new_angle}")
             await asyncio.sleep(0.1)
+
+            if new_angle<=10:
+                GPIO.output(zero_LED,True)
+                GPIO.output(N_LED,False)
+
+            elif new_angle>=80:
+                GPIO.output(N_LED,True)
+                GPIO.output(zero_LED,False)
+                
+            else:
+                GPIO.output(N_LED,False)
+                GPIO.output(N_LED,False)
 
             GPIO.output(Trig,False)                    #activating the Ultrasonic sensor to detect object 
             #print("sensoring setting")
@@ -128,6 +143,7 @@ class Eventhandler:
             elif not status:
                 print(f"button status {status} ")
                 print("Restarting the Program")
+                value = 0
                 GPIO.cleanup()
                 python = sys.executable 
                 script = os.path.abspath(__file__)
