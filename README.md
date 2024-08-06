@@ -22,3 +22,10 @@ Things to do in this project are:
 
 
 ![](https://i.pinimg.com/736x/d3/bf/21/d3bf218fb82d5beb6c1e342d02f19508.jpg)
+
+
+
+## Flow Chart
+
+![](https://i.pinimg.com/736x/30/9e/9f/309e9fa787021e7e4e818fb052ff39e4.jpg)
+
