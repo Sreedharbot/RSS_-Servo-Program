@@ -39,6 +39,19 @@ In this project, I have used Raspberry Pi 3b+ model.
 
 
 
+Hardware :
+* Raspberry Pi 3b+
+* MCP3008 - ADC (Analog to Digital Convertor)
+* Limit Switch
+* Servo - SG90
+* 10k Potentiometer 
+* Ultra-Sonic Sensor (HC-SR04)
+* Red LED  
+* Green LED
+* Some Resistors (220E , 1K , 470E, 750E)
+
+
+#### Raspberry Pi 3b+ Pinouts - Pin Configuration 
 
                              3.3V - |1      2| - 5V
                                     |3      4| - 5v
@@ -51,7 +64,7 @@ In this project, I have used Raspberry Pi 3b+ model.
                                     |17    18|
                       MOSI (SPI0) - |19    20|
                       MISO (SPI0) - |21    22|
-                Serial CLK (SPI0) - |23    24| - CS (Chip select - SPI0)
+                Serial CLK (SPI0) - |23    24| - CS (Chip Select - SPI0)
                                     |25    26|
                                     |27    28|
                                     |29    30|
@@ -62,3 +75,13 @@ In this project, I have used Raspberry Pi 3b+ model.
                                     |39    40| - Trig (Ultra-Sonic Sensor)
 
 
+#### MCP3008 Pinouts - Pin Configuration 
+
+        (Potentiometer) Channel 0 - |1      2| - 3.3V
+                        Channel 1 - |3      4| - 3.3v
+                        Channel 2 - |5      6| - GND
+                        Channel 3 - |7      8| - Serial CLK 
+                        Channel 4 - |9     10| - MISO 
+                        Channel 5 - |11    12| - MOSI
+                        Channel 6 - |13    14| - CS (Chip Select)
+                        Channel 7 - |15    16| - GND
