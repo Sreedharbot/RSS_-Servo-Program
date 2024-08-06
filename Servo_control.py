@@ -34,13 +34,8 @@ GPIO.setup(servo_pin,GPIO.OUT)
 GPIO.setup(Led,GPIO.OUT)
 GPIO.setup(Trig,GPIO.OUT)
 GPIO.setup(echo,GPIO.IN)
-<<<<<<< HEAD
-GPIO.setup(zero_LED,GPIO.OUT)            #0° LED
-GPIO.setup(N_LED,GPIO.OUT)               #90° LED
-=======
 GPIO.setup(zero_LED,GPIO.OUT)
 GPIO.setup(N_LED,GPIO.OUT)
->>>>>>> 36f0a3c775ab697330d8e0a082a8dc838c88b1ec
 
 pwm = GPIO.PWM(servo_pin,50)
 pwm.start(0)                             #Starting servo 
@@ -72,16 +67,9 @@ class Eventhandler:
             a = self.rot_angle(i)                       
             pwm.ChangeDutyCycle(a)
             limit_status = GPIO.input(swt_pin)
-            print(i)
+            # print(i)
             print(a)
-<<<<<<< HEAD
             time.sleep(0.2)
-=======
-            time.sleep(1
-            
-            
-            )
->>>>>>> 36f0a3c775ab697330d8e0a082a8dc838c88b1ec
             if not limit_status:                        # Detecting Collision in the limit swtich.
                 print("Servo is at 0°")
                 #pwm.stop()
@@ -99,11 +87,7 @@ class Eventhandler:
             pwm.ChangeDutyCycle(a)
             print(self.home_angle-i)
             print(a)                                    #pulse-width signal
-<<<<<<< HEAD
             time.sleep(0.2)
-=======
-            time.sleep(1)
->>>>>>> 36f0a3c775ab697330d8e0a082a8dc838c88b1ec
         await asyncio.sleep(0.3)
 
     async def potentiometer(self):                      #Using Pot to control the Servo 
@@ -117,11 +101,7 @@ class Eventhandler:
                 print(f"ADC value from the pot {value} & the servo position is {new_angle}")
             await asyncio.sleep(0.1)
 
-<<<<<<< HEAD
             if new_angle<=10:
-=======
-            if new_angle==0:
->>>>>>> 36f0a3c775ab697330d8e0a082a8dc838c88b1ec
                 GPIO.output(zero_LED,True)
                 GPIO.output(N_LED,False)
 
