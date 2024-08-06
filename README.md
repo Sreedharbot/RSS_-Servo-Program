@@ -35,7 +35,7 @@ Things to do in this project are:
 
 In this project, I have used Raspberry Pi 3b+ model.
 
-    > **Note** : In Raspberry pi, you cannot drive **5V** OUTPUT/INPUT sensor (or) actuator.
+> **Note** : In Raspberry pi, you cannot drive **5V** OUTPUT/INPUT sensor (or) actuator.
 
 
 
