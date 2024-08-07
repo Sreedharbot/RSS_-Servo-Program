@@ -10,11 +10,11 @@ Things to do in this project are:
 * Calibration Servo using Limit Swtich
 * Rotating 90° after Homing.
 * Controlling the servo using potentiometer.
-* Detecting objects using ultrasonic sensor.
+* Detecting objects using a Ultrasonic sensor.
 * If the object is too close (Less than 15cm) LED, should turn ON.
-* If the object is too close, (Less than 15cm) servo should be disable while oprating the potentiometer.
-* When the potentiometer is "0" the servo should move to 0° also should activate LED indicating servo reached 0°. 
-* When the potentiometer is "1023" the servo should move to 90° also should activate LED indicating servo reached 90°.
+* If the object is too close, (Less than 15 cm) servo should be disabled while operating the potentiometer.
+* When the potentiometer is "0" the servo should move to 0° and also should activate the LED indicating the servo reached 0°. 
+* When the potentiometer is "1023" the servo should move to 90° and also should activate LED indicating the servo reached 90°.
 
 
 
@@ -33,7 +33,7 @@ Things to do in this project are:
 
 ## Pin Configuration 
 
-In this project, I have used Raspberry Pi 3b+ model.
+In this project, I have used the Raspberry Pi 3b+ model.
 
 > **Note** : In Raspberry pi, you cannot drive **5V** OUTPUT/INPUT sensor (or) actuator.
 
@@ -74,6 +74,8 @@ Hardware :
         Echo (Ultra-Sonic Sensor) - |37    38| - LED ( 90° Position - OUTPUT)
                                     |39    40| - Trig (Ultra-Sonic Sensor)
 
+
+These are the BMC pins of raspberry p, which means physical pins.
 
 #### MCP3008 Pinouts - Pin Configuration 
 
