@@ -1,21 +1,30 @@
-# RSS_-Servo-Program
-Robot Signals & Sensors
+# Single Degree - Freedom Robotic Arm
 
-This repo is for testing servo with raspiberry pi 3b+
+Robotic Sensors & Signal Processing
 
-I used python code for controlling the servo.
+This repo is for testing servo with raspberry pi 3b+ and uses python code for controlling the servo.
 
 Things to do in this project are:
 
-* Calibration Servo using Limit Swtich
+* Calibration Servo using Limit Switch
 * Rotating 90° after Homing.
 * Controlling the servo using potentiometer.
 * Detecting objects using a Ultrasonic sensor.
-* If the object is too close (Less than 15cm) LED, should turn ON.
+* If the object is too close (Less than 15 cm) LED, should turn ON.
 * If the object is too close, (Less than 15 cm) servo should be disabled while operating the potentiometer.
 * When the potentiometer is "0" the servo should move to 0° and also should activate the LED indicating the servo reached 0°. 
 * When the potentiometer is "1023" the servo should move to 90° and also should activate LED indicating the servo reached 90°.
 
+
+To keep things neat. I made a case to place my components.
+
+[Check out this like to print for case for yourself](https://www.printables.com/model/947881-raspberry-pi-3b-breadboard-case)
+
+
+### This is the case 3D-model & design revision to 
+![](https://www.printables.com/model/947881-raspberry-pi-3b-breadboard-case#preview)
+
+![](https://www.printables.com/model/947881-raspberry-pi-3b-breadboard-case#preview)
 
 
 ## Wiring Diagram
@@ -45,7 +54,7 @@ Hardware :
 * Limit Switch
 * Servo - SG90
 * 10k Potentiometer 
-* Ultra-Sonic Sensor (HC-SR04)
+* Ultrasonic Sensor (HC-SR04)
 * Red LED  
 * Green LED
 * Some Resistors (220E , 1K , 470E, 750E)
@@ -71,8 +80,8 @@ Hardware :
                                     |31    32|
                                     |33    34|
                                     |35    36| - LED ( 0° Position - OUTPUT) 
-        Echo (Ultra-Sonic Sensor) - |37    38| - LED ( 90° Position - OUTPUT)
-                                    |39    40| - Trig (Ultra-Sonic Sensor)
+        Echo (Ultrasonic Sensor) -  |37    38| - LED ( 90° Position - OUTPUT)
+                                    |39    40| - Trig (Ultrasonic Sensor)
 
 
 These are the BMC pins of raspberry p, which means physical pins.
