@@ -148,7 +148,7 @@ class Eventhandler:
                 value = 0
                 pwm.stop()
                 
-            elif not status:
+            elif not status:                                    #restaring the program, when the limit swtich is pressed
                 print(f"button status {status} ")
                 print("Restarting the Program")
                 value = 0
