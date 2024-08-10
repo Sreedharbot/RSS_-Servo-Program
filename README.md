@@ -22,9 +22,9 @@ To keep things neat. I made a case to place my components.
 
 
 ### This is the case 3D-model & design revision to 
-![](https://www.printables.com/model/947881-raspberry-pi-3b-breadboard-case#preview)
+![](https://media.printables.com/media/prints/947881/images/7237955_8b79199f-410a-4814-87b1-2dd7a014fc08_6ac41d04-9d1c-4499-8e8e-b1a93064cbe7/thumbs/inside/1920x1440/png/snipaste_2024-07-19_20-31-24.webp)
 
-![](https://www.printables.com/model/947881-raspberry-pi-3b-breadboard-case#preview)
+![](https://media.printables.com/media/prints/947881/images/7237991_b26a679d-451e-42dd-b50d-21b872e4777f_5044b605-af34-49bc-86f8-5b35085b0665/thumbs/inside/1920x1440/jpg/img20240719193845.webp)
 
 
 ## Wiring Diagram
