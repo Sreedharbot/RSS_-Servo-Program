@@ -24,6 +24,7 @@ To keep things neat. I made a case to place my components.
 ### This is the case 3D-model & design revisions "DFMA"
 ![](https://media.printables.com/media/prints/947881/images/7237955_8b79199f-410a-4814-87b1-2dd7a014fc08_6ac41d04-9d1c-4499-8e8e-b1a93064cbe7/thumbs/inside/1920x1440/png/snipaste_2024-07-19_20-31-24.webp)
 
+
 ![](https://media.printables.com/media/prints/947881/images/7237991_b26a679d-451e-42dd-b50d-21b872e4777f_5044b605-af34-49bc-86f8-5b35085b0665/thumbs/inside/1920x1440/jpg/img20240719193845.webp)
 
 
@@ -99,9 +100,9 @@ These are the BMC pins of raspberry p, which means physical pins.
 
 
 
-# video
+# Video
 
-Here is the video of requirement performing the requirement.
+Here is the video  performing the requirements.
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/_SoGFVkTYOc?si=rhViTzEiNT6bknse/0.jpg)](https://www.youtube.com/watch?v=_SoGFVkTYOc?si=rhViTzEiNT6bknse)
+[![Working video](https://i9.ytimg.com/vi_webp/_SoGFVkTYOc/mqdefault.webp?v=66b3662d&sqp=COjT37UG&rs=AOn4CLBtPGaFiVQesABS6qJB392Hk_DdqQ)](https://youtu.be/_SoGFVkTYOc?si=1rr-4WGvHyOw_S2s)
 
