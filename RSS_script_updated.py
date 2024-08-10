@@ -1,6 +1,7 @@
 
-#Authur: Sreedhar
+#Authur: Sreedhar RP
 #Creation Date: 27-07-2024
+
 
 #Libraries Added
 import asyncio
@@ -36,9 +37,9 @@ GPIO.setup(Trig,GPIO.OUT)
 GPIO.setup(echo,GPIO.IN)
 GPIO.setup(zero_LED,GPIO.OUT)
 GPIO.setup(N_LED,GPIO.OUT)
-
 pwm = GPIO.PWM(servo_pin,50)
-pwm.start(0)                             #Starting servo 
+pwm.start(0)
+
 
 
 #using handler to execute the task.
@@ -47,6 +48,28 @@ class Eventhandler:
         self.zero = 0
         self.home_angle = 0
         self.position = 0
+
+    def led_activation(self,new_angle):             #function used to set operation leds.
+        if new_angle<10:
+            GPIO.output(zero_LED,True)                  #0° LED will "Turn On" at 0 ADC value or 0° Servo position 
+            GPIO.output(N_LED,False)
+
+        elif new_angle>=80:
+            GPIO.output(N_LED,True)                     #90° LED will "Turn On" at 1023 ADC value or 90° Servo position 
+            GPIO.output(zero_LED,False)
+                
+        else:
+            GPIO.output(zero_LED,False)                 #both LED with be "Turn Off" when it have not reached 0° or 90° value.
+            GPIO.output(N_LED,False)
+
+    def pot_tuning(self,):                          #Function used to map the potentionmeter value with servo angles  
+        value = self.pot_value(0)
+        new_angle = (90/1023)*value
+        #new_angle = 90 - new_angle
+        new_angle = round(new_angle,2)              
+        b = self.rot_angle(new_angle)
+        pwm.ChangeDutyCycle(b)
+        return new_angle , value
 
 
     def rot_angle(self,i):                          # Function used to Change Angles to Duty Cycle
@@ -64,12 +87,12 @@ class Eventhandler:
 
     async def servo(self):                              #Async Function for calibarating servo.
         for i in range(0,190,10):
-            a = self.rot_angle(i)                       
+            a = self.rot_angle(i)
             pwm.ChangeDutyCycle(a)
             limit_status = GPIO.input(swt_pin)
-            # print(i)
-            print(a)
-            time.sleep(0.2)
+            print(i)
+            #print(a)
+            time.sleep(0.3)
             if not limit_status:                        # Detecting Collision in the limit swtich.
                 print("Servo is at 0°")
                 #pwm.stop()
@@ -79,6 +102,7 @@ class Eventhandler:
                 break
         await asyncio.sleep(0.3)
 
+
     async def servo_rotate(self):                       #Rotating 90° after homing
         self.position = self.home_angle-100
         print(f'home angle is {self.home_angle} & position is {self.position}')
@@ -86,38 +110,22 @@ class Eventhandler:
             a = self.rot_angle(i)
             pwm.ChangeDutyCycle(a)
             print(self.home_angle-i)
-            print(a)                                    #pulse-width signal
-            time.sleep(0.2)
+            #print(a)                                    #pulse-width signal
+            time.sleep(0.3)
         await asyncio.sleep(0.3)
 
     async def potentiometer(self):                      #Using Pot to control the Servo 
         while True:
-            value = self.pot_value(0)
-            new_angle = (90/1023)*value               
-            b = self.rot_angle(new_angle)
-            pwm.ChangeDutyCycle(b)
-
-            if value>0:
-                print(f"ADC value from the pot {value} & the servo position is {new_angle}")
+            a,b = self.pot_tuning()
+            self.pot_tuning()
             await asyncio.sleep(0.1)
-
-            if new_angle<=10:
-                GPIO.output(zero_LED,True)
-                GPIO.output(N_LED,False)
-
-            elif new_angle>=80:
-                GPIO.output(N_LED,True)
-                GPIO.output(zero_LED,False)
-                
-            else:
-                GPIO.output(N_LED,False)
-                GPIO.output(N_LED,False)
+            self.led_activation(a)
 
             GPIO.output(Trig,False)                    #activating the Ultrasonic sensor to detect object 
             #print("sensoring setting")
-            time.sleep(0.3)
+            await asyncio.sleep(0.1)
             GPIO.output(Trig,True)
-            time.sleep(0.00001)
+            await asyncio.sleep(0.00001)
             GPIO.output(Trig,False)
 
 
@@ -147,12 +155,15 @@ class Eventhandler:
                 GPIO.cleanup()
                 python = sys.executable 
                 script = os.path.abspath(__file__)
+                print(script)
+                await asyncio.sleep(1)
                 os.execl(python, python, script, *sys.argv)
 
 
             else:
                 GPIO.output(Led,False)
-            
+                print(f"ADC value from the pot {b} & the servo position is {a}")
+
 
     async def shutdown(self):
         pwm.stop()
@@ -162,7 +173,6 @@ class Eventhandler:
         await self.servo()
         await self.servo_rotate()
         await self.potentiometer()
-        #await limit()
         await self.shutdown()
 
 
@@ -174,3 +184,4 @@ except KeyboardInterrupt:                   #Keyboardinterrupt to exit the code,
     pwm.stop()
     GPIO.cleanup()
     print("Closing the program")
+    time.sleep(0.5)
