@@ -103,7 +103,7 @@ These are the BMC pins of raspberry p, which means physical pins.
 
 Here the step by step video for installing and setting RPi.
 
-[![](https://i.pinimg.com/originals/fd/a6/78/fda6781659200484ad80b78199dad7a9.jpg)](https://youtu.be/_SoGFVkTYOc?si=kMShTpNBR0lufs1i)
+[![](https://i.pinimg.com/originals/fd/a6/78/fda6781659200484ad80b78199dad7a9.jpg)](https://youtu.be/jP865F0k3Yc?si=ZJJRH7eriDwW98QY)
 
 
 
