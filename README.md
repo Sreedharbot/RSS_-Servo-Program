@@ -99,8 +99,16 @@ These are the BMC pins of raspberry p, which means physical pins.
                         Channel 7 - |15    16| - GND
 
 
+#  Software Installation  Video
 
-# Video
+Here the step by step video for installing and setting RPi.
+
+[![](https://i.pinimg.com/originals/fd/a6/78/fda6781659200484ad80b78199dad7a9.jpg)](https://youtu.be/_SoGFVkTYOc?si=kMShTpNBR0lufs1i)
+
+
+
+
+#  Working Video
 
 Here is the video  performing the requirements.
 
