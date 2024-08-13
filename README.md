@@ -104,5 +104,5 @@ These are the BMC pins of raspberry p, which means physical pins.
 
 Here is the video  performing the requirements.
 
-[![](https://i9.ytimg.com/vi_webp/_SoGFVkTYOc/maxresdefault.webp?v=66b3662d&sqp=CJiN6bUG&rs=AOn4CLB16s3sx3SKKEc4qQPbGiGaFKm9HQ)](https://youtu.be/_SoGFVkTYOc?si=1rr-4WGvHyOw_S2s)
+[![](https://i.pinimg.com/originals/fd/a6/78/fda6781659200484ad80b78199dad7a9.jpg)](https://youtu.be/_SoGFVkTYOc?si=1rr-4WGvHyOw_S2s)
 
